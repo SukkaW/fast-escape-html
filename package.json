@@ -42,6 +42,7 @@
   "devDependencies": {
     "@eslint-sukka/node": "^6.20.0",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@mitata/counters": "^0.0.8",
     "@napi-rs/escape": "^1.0.1",
     "@swc-node/register": "^1.10.10",
     "@types/escape-html": "^1.0.4",

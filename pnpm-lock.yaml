@@ -14,6 +14,9 @@ importers:
       '@istanbuljs/nyc-config-typescript':
         specifier: ^1.0.2
         version: 1.0.2(nyc@17.1.0)
+      '@mitata/counters':
+        specifier: ^0.0.8
+        version: 0.0.8
       '@napi-rs/escape':
         specifier: ^1.0.1
         version: 1.0.1
@@ -291,6 +294,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@mitata/counters@0.0.8':
+    resolution: {integrity: sha512-f11w0Y1ETFlarDP7CePj8Z+y8Gv5Ax4gMxWsEwrqh0kH/YIY030Ezx5SUJeQg0YPTZ2OHKGcLG1oGJbIqHzaJA==}
 
   '@napi-rs/escape-android-arm-eabi@1.0.1':
     resolution: {integrity: sha512-sWNT0ommlBeJLVfv9gzCPq6uDl3pcyAXtN5D944x59QwHqzyCXXNfSueJlY1gCe07iLXUa9U9Ab1ILagQn7M3g==}
@@ -2623,6 +2629,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@mitata/counters@0.0.8': {}
 
   '@napi-rs/escape-android-arm-eabi@1.0.1':
     optional: true
