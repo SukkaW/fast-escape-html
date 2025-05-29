@@ -10,7 +10,8 @@ import { escapeHTML as escapeHTMLRs } from '@napi-rs/escape';
 
 (async () => {
   const { bench, group, run } = await import('mitata');
-  const { escapeHTML } = await import('../dist/cjs/index.js');
+  // eslint-disable-next-line import-x/no-unresolved -- only exist after build
+  const { escapeHTML } = await import('../dist/es/index.mjs');
 
   const fns = [
     ['fast-escape-html', escapeHTML],
