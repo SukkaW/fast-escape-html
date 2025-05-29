@@ -1,6 +1,6 @@
 {
   "name": "fast-escape-html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fastest HTML escape on Node.js, even faster than the Rust-based one!",
   "repository": {
     "url": "https://github.com/SukkaW/fast-escape-html"
