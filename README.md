@@ -1,8 +1,8 @@
 # fast-escape-html
 
-**Fastest**, zero-dependencies, plain JavaScript, 100% test coverage, HTML escaping library for JavaScript.
+**Fastest**, zero-dependencies, plain JavaScript-based, 100% test coverage, HTML escaping library for JavaScript, works in both Node.js and browser.
 
-Even faster than the Rust-based [`@napi-rs/escape`](https://www.npmjs.com/package/@napi-rs/escape) on Node.js (see realworld benchmark below)!
+Even faster than the Rust-based `@napi-rs/escape` with real world HTMLs (see benchmark below)!
 
 ## Installation
 
@@ -21,7 +21,7 @@ import { escapeHTML } from 'fast-escape-html';
 
 ## Benchmark
 
-The benchmark is run using [`mitata`](https://www.npmjs.com/package/mitata) against realworld websites' HTML:
+The benchmark uses [`mitata`](https://www.npmjs.com/package/mitata) against realworld websites' HTMLs:
 
 - https://skk.moe
 - https://github.com (in incognito mode)
@@ -35,7 +35,8 @@ pnpm i && pnpm run build
 
 # Run the benchmark
 pnpm run bench
-# On supported platforms (Linux, macOS), you can use "sudo" to enable hardware counter
+# On supported platforms, you can use "sudo" to enable hardware counter
+# https://github.com/evanwashere/mitata#hardware-counters
 sudo pnpm run bench
 ```
 
