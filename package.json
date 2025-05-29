@@ -26,8 +26,9 @@
   "scripts": {
     "lint": "eslint --format=sukka .",
     "test": "SWC_NODE_IGNORE_DYNAMIC=1 SWC_NODE_PROJECT=tsconfig.test-swc.json nyc mocha --require @swc-node/register --full-trace ./src/**/*.test.ts",
+    "prebench": "pnpm run build",
     "bench": "SWC_NODE_IGNORE_DYNAMIC=1 node --require @swc-node/register benchmark/index.ts",
-    "build": "bunchee --minify --no-sourcemap",
+    "build": "bunchee --no-sourcemap",
     "prerelease": "pnpm run lint && pnpm run test && pnpm run build",
     "release": "bumpp -r --all --commit \"release: %s\" --tag \"%s\""
   },
@@ -42,6 +43,10 @@
   "devDependencies": {
     "@eslint-sukka/node": "^6.20.0",
     "@napi-rs/escape": "^1.0.1",
+    "@swc-node/register": "^1.10.10",
+    "@types/escape-html": "^1.0.4",
+    "@types/html-escaper": "^3.0.4",
+    "@types/lodash.escape": "^4.0.9",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.15.24",
     "bumpp": "^10.1.1",
