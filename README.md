@@ -43,7 +43,7 @@ sudo pnpm run bench
 Results follow:
 
 ```
-clk: ~3.08 GHz
+clk: ~3.17 GHz
 cpu: Apple M2 Max
 runtime: node 22.15.1 (arm64-darwin)
 
@@ -51,153 +51,191 @@ benchmark                   avg (min … max) p75 / p99    (min … top 1%)
 ------------------------------------------- -------------------------------
 • skk.moe
 ------------------------------------------- -------------------------------
-fast-escape-html             232.16 µs/iter 232.96 µs  █
-                    (213.21 µs … 678.54 µs) 404.00 µs ██▆
-                    ( 27.85 kb … 843.56 kb) 485.34 kb ███▆▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.62 ipc (  0.91% stalls)  99.27% L1 data cache
-        779.25k cycles   3.60M instructions  21.18% retired LD/ST (763.14k)
+fast-escape-html             227.50 µs/iter 229.71 µs  █
+                    (208.46 µs … 430.29 µs) 359.75 µs  █▆
+                    (100.02 kb … 883.06 kb) 485.43 kb ████▅▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.64 ipc (  0.87% stalls)  99.35% L1 data cache
+        777.26k cycles   3.61M instructions  21.15% retired LD/ST (763.48k)
 
-escape-html                  238.36 µs/iter 240.25 µs ▇█
-                    (218.67 µs … 475.92 µs) 410.46 µs ██▅
-                    ( 63.66 kb … 694.84 kb) 484.96 kb ████▅▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.51 ipc (  0.92% stalls)  99.21% L1 data cache
-        798.45k cycles   3.60M instructions  21.06% retired LD/ST (758.76k)
+escape-html                  231.02 µs/iter 235.46 µs  █
+                    (211.71 µs … 488.08 µs) 380.33 µs  █
+                    ( 35.66 kb … 723.82 kb) 484.97 kb ███▆▆▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.60 ipc (  1.02% stalls)  99.12% L1 data cache
+        782.60k cycles   3.60M instructions  21.07% retired LD/ST (759.07k)
 
-@napi-rs/escape              258.84 µs/iter 256.58 µs █▅
-                      (233.29 µs … 1.12 ms) 798.33 µs ██
-                    (128.29 kb … 288.27 kb) 207.77 kb ██▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.46 ipc ( 16.99% stalls)  83.26% L1 data cache
-        871.52k cycles   3.88M instructions  23.64% retired LD/ST (917.78k)
+@napi-rs/escape              262.46 µs/iter 263.04 µs  █
+                      (226.17 µs … 1.55 ms) 633.96 µs ██
+                    (207.75 kb … 207.77 kb) 207.77 kb ██▇▇▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.52 ipc ( 16.84% stalls)  83.70% L1 data cache
+        873.05k cycles   3.95M instructions  23.64% retired LD/ST (933.00k)
 
-html-escaper                 398.49 µs/iter 393.75 µs ▄█
-                      (356.50 µs … 1.29 ms)   1.13 ms ██
-                    (540.52 kb … 598.27 kb) 574.07 kb ██▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.12 ipc (  2.92% stalls)  97.81% L1 data cache
-          1.34M cycles   5.51M instructions  34.03% retired LD/ST (  1.88M)
+html-escaper                 385.23 µs/iter 385.38 µs  █
+                    (347.17 µs … 963.50 µs) 660.58 µs  ██
+                    (508.75 kb … 576.19 kb) 571.14 kb ▅███▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.23 ipc (  3.01% stalls)  97.82% L1 data cache
+          1.31M cycles   5.53M instructions  34.01% retired LD/ST (  1.88M)
 
-lodash.escape                401.68 µs/iter 396.58 µs ▃█
-                      (360.42 µs … 1.38 ms)   1.13 ms ██
-                    (540.52 kb … 576.36 kb) 574.17 kb ██▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.17 ipc (  2.90% stalls)  97.87% L1 data cache
-          1.35M cycles   5.63M instructions  34.15% retired LD/ST (  1.92M)
+lodash.escape                389.55 µs/iter 388.08 µs  █
+                      (353.88 µs … 1.47 ms) 813.17 µs  █
+                    (468.27 kb … 576.36 kb) 574.02 kb ███▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.24 ipc (  2.95% stalls)  97.89% L1 data cache
+          1.33M cycles   5.64M instructions  34.09% retired LD/ST (  1.92M)
 
-escape-goat                  530.94 µs/iter 514.38 µs  █
-                      (462.88 µs … 1.55 ms)   1.34 ms ▅█
-                    (  1.22 mb …   1.22 mb)   1.22 mb ██▅▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  3.49 ipc (  2.86% stalls)  97.48% L1 data cache
-          1.78M cycles   6.21M instructions  30.85% retired LD/ST (  1.92M)
+escape-goat                  506.45 µs/iter 499.46 µs  █
+                      (454.54 µs … 1.29 ms)   1.05 ms  █
+                    (  1.22 mb …   1.22 mb)   1.22 mb ███▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  3.60 ipc (  2.92% stalls)  97.54% L1 data cache
+          1.72M cycles   6.21M instructions  30.87% retired LD/ST (  1.92M)
 
 • github.com (incognito)
 ------------------------------------------- -------------------------------
-fast-escape-html             785.30 µs/iter 784.13 µs  █▄
-                      (728.21 µs … 1.13 ms)   1.08 ms  ██▄
-                    (  1.19 mb …   1.19 mb)   1.19 mb ▆███▇▄▂▁▁▁▁▁▁▁▁▂▂▂▂▂▁
-                  4.58 ipc (  1.13% stalls)  98.80% L1 data cache
-          2.63M cycles  12.05M instructions  20.31% retired LD/ST (  2.45M)
+fast-escape-html             764.52 µs/iter 766.75 µs   █
+                      (708.88 µs … 1.17 ms) 985.13 µs  ▇█▇▅
+                    (  1.19 mb …   1.19 mb)   1.19 mb ▃████▇▄▂▁▁▁▁▁▁▁▂▃▂▂▂▁
+                  4.62 ipc (  0.70% stalls)  99.50% L1 data cache
+          2.61M cycles  12.04M instructions  20.30% retired LD/ST (  2.45M)
 
-escape-html                  793.97 µs/iter 792.50 µs  █
-                      (739.17 µs … 1.24 ms)   1.10 ms  ██
-                    (  1.19 mb …   1.19 mb)   1.19 mb ████▅▄▂▁▁▁▁▁▁▁▂▂▂▂▂▁▁
-                  4.53 ipc (  1.12% stalls)  98.79% L1 data cache
-          2.66M cycles  12.08M instructions  20.18% retired LD/ST (  2.44M)
+escape-html                  771.81 µs/iter 777.13 µs  █▇▃
+                      (717.63 µs … 1.17 ms)   1.04 ms ████▅
+                    (  1.19 mb …   1.19 mb)   1.19 mb █████▆▄▂▂▁▁▁▂▁▃▂▂▂▁▁▂
+                  4.56 ipc (  0.80% stalls)  99.31% L1 data cache
+          2.65M cycles  12.06M instructions  20.16% retired LD/ST (  2.43M)
 
-@napi-rs/escape              947.18 µs/iter 947.54 µs  █▃
-                      (820.58 µs … 3.08 ms)   2.03 ms  ██
-                    (697.81 kb … 697.81 kb) 697.81 kb ▇██▇▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.60 ipc ( 18.52% stalls)  82.32% L1 data cache
-          3.03M cycles  13.95M instructions  23.42% retired LD/ST (  3.27M)
+@napi-rs/escape              878.95 µs/iter 899.88 µs     ▆▆█▇
+                      (793.75 µs … 1.32 ms)   1.07 ms    ▃████▇▅
+                    (697.81 kb … 697.81 kb) 697.81 kb ▅█████████▇▅▄▂▃▂▁▁▁▁▁
+                  4.73 ipc ( 19.05% stalls)  82.51% L1 data cache
+          2.95M cycles  13.95M instructions  23.44% retired LD/ST (  3.27M)
 
-html-escaper                   1.19 ms/iter   1.18 ms  █▃
-                        (1.07 ms … 1.92 ms)   1.81 ms  ██▅
-                    (  1.37 mb …   1.43 mb)   1.39 mb ▇███▆▂▁▂▂▂▂▂▁▂▁▁▁▁▂▂▁
-                  3.89 ipc (  2.50% stalls)  98.00% L1 data cache
-          3.97M cycles  15.44M instructions  33.38% retired LD/ST (  5.16M)
+html-escaper                   1.24 ms/iter   1.23 ms  █
+                        (1.04 ms … 4.10 ms)   2.79 ms  █
+                    (  1.37 mb …   1.43 mb)   1.39 mb ██▇▄▂▁▂▁▂▂▁▁▁▁▁▁▁▁▁▁▁
+                  3.92 ipc (  2.50% stalls)  98.03% L1 data cache
+          3.95M cycles  15.45M instructions  33.35% retired LD/ST (  5.15M)
 
-lodash.escape                  1.18 ms/iter   1.16 ms  █
-                        (1.07 ms … 1.91 ms)   1.82 ms  ██
-                    (  1.37 mb …   1.43 mb)   1.39 mb ▇███▄▂▁▁▁▁▁▁▁▁▂▂▂▂▂▁▁
-                  3.98 ipc (  2.51% stalls)  98.05% L1 data cache
-          3.94M cycles  15.66M instructions  33.63% retired LD/ST (  5.27M)
+lodash.escape                  1.16 ms/iter   1.16 ms  ▂█▃
+                        (1.04 ms … 1.88 ms)   1.75 ms  ███
+                    (  1.37 mb …   1.43 mb)   1.39 mb ▅████▃▂▁▁▁▁▂▁▂▁▂▂▁▂▁▁
+                  4.02 ipc (  2.52% stalls)  98.06% L1 data cache
+          3.90M cycles  15.65M instructions  33.64% retired LD/ST (  5.27M)
 
-escape-goat                    1.40 ms/iter   1.38 ms  █▅▂
-                        (1.20 ms … 2.26 ms)   2.18 ms  ███
-                    (  3.82 mb …   3.82 mb)   3.82 mb █████▅▁▁▁▁▁▂▂▂▂▂▂▂▂▃▂
-                  3.47 ipc (  3.33% stalls)  97.22% L1 data cache
-          4.69M cycles  16.30M instructions  30.52% retired LD/ST (  4.97M)
+escape-goat                    1.34 ms/iter   1.32 ms  █▅
+                        (1.18 ms … 2.18 ms)   1.93 ms  ███
+                    (  3.82 mb …   3.82 mb)   3.82 mb ▄███▇▃▂▁▁▁▂▃▂▂▂▃▃▂▂▁▁
+                  3.58 ipc (  3.40% stalls)  97.29% L1 data cache
+          4.55M cycles  16.29M instructions  30.53% retired LD/ST (  4.97M)
 
 • stackoverflow.com (incognito)
 ------------------------------------------- -------------------------------
-fast-escape-html             686.05 µs/iter 680.38 µs  █▂
-                      (628.13 µs … 1.05 ms)   1.01 ms  ██▂
-                    (  1.18 mb …   1.18 mb)   1.18 mb ████▄▂▁▁▁▁▁▁▁▁▁▁▁▂▃▂▁
-                  4.40 ipc (  0.86% stalls)  99.28% L1 data cache
-          2.31M cycles  10.16M instructions  21.21% retired LD/ST (  2.15M)
+fast-escape-html             681.29 µs/iter 677.21 µs  █▅
+                      (611.54 µs … 1.89 ms)   1.04 ms ▃██▂
+                    (  1.18 mb …   1.18 mb)   1.18 mb ████▅▃▂▂▂▁▁▁▁▂▂▂▂▂▁▁▁
+                  4.42 ipc (  0.84% stalls)  99.35% L1 data cache
+          2.30M cycles  10.16M instructions  21.19% retired LD/ST (  2.15M)
 
-escape-html                  699.20 µs/iter 693.96 µs  █▅
-                      (640.37 µs … 1.07 ms)   1.02 ms ▃██▄
-                    (  1.18 mb …   1.18 mb)   1.18 mb ████▅▃▂▁▁▁▁▁▁▁▁▁▁▂▃▂▁
-                  4.34 ipc (  0.89% stalls)  99.21% L1 data cache
-          2.34M cycles  10.18M instructions  21.03% retired LD/ST (  2.14M)
+escape-html                  734.02 µs/iter 704.79 µs  █
+                      (621.92 µs … 3.83 ms)   1.81 ms ▅█
+                    (  1.18 mb …   1.18 mb)   1.18 mb ██▄▂▂▂▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.31 ipc (  0.94% stalls)  99.13% L1 data cache
+          2.36M cycles  10.19M instructions  21.02% retired LD/ST (  2.14M)
 
-@napi-rs/escape              763.80 µs/iter 781.42 µs    █▃
-                      (683.71 µs … 1.31 ms)   1.12 ms  ▂▆██▄
-                    (586.23 kb … 586.23 kb) 586.23 kb ▃█████▅▃▂▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.43 ipc ( 17.79% stalls)  82.33% L1 data cache
-          2.51M cycles  11.10M instructions  23.40% retired LD/ST (  2.60M)
+@napi-rs/escape              817.10 µs/iter 819.04 µs   █▅
+                      (690.96 µs … 2.30 ms)   1.47 ms  ███
+                    (586.23 kb … 586.23 kb) 586.23 kb ▃████▃▂▂▂▂▁▁▁▁▁▁▁▁▂▁▁
+                  4.34 ipc ( 16.78% stalls)  82.95% L1 data cache
+          2.56M cycles  11.11M instructions  23.36% retired LD/ST (  2.59M)
 
-html-escaper                   1.13 ms/iter   1.13 ms  █
-                        (1.03 ms … 1.89 ms)   1.76 ms ▃██
-                    (  1.23 mb …   1.32 mb)   1.28 mb ████▃▂▁▁▁▁▂▂▁▁▁▁▁▂▁▁▁
-                  3.83 ipc (  2.42% stalls)  98.07% L1 data cache
-          3.78M cycles  14.47M instructions  33.57% retired LD/ST (  4.86M)
+html-escaper                   1.12 ms/iter   1.12 ms   █▄
+                        (1.00 ms … 1.80 ms)   1.60 ms  ▆██
+                    (  1.23 mb …   1.32 mb)   1.28 mb ▆████▅▃▂▂▂▃▂▁▂▂▃▂▂▁▁▁
+                  3.84 ipc (  2.45% stalls)  98.07% L1 data cache
+          3.78M cycles  14.50M instructions  33.51% retired LD/ST (  4.86M)
 
-lodash.escape                  1.13 ms/iter   1.12 ms  █▃
-                        (1.03 ms … 1.93 ms)   1.81 ms  ██
-                    (  1.26 mb …   1.32 mb)   1.28 mb ███▇▃▁▁▁▁▁▁▁▁▂▁▁▁▂▁▂▁
-                  3.88 ipc (  2.42% stalls)  98.11% L1 data cache
-          3.79M cycles  14.72M instructions  33.78% retired LD/ST (  4.97M)
+lodash.escape                  1.11 ms/iter   1.12 ms  ▄█▃
+                        (1.01 ms … 1.84 ms)   1.64 ms  ███▃
+                    (  1.18 mb …   1.35 mb)   1.28 mb ▆████▄▂▁▁▁▁▁▁▁▂▂▁▂▁▂▁
+                  3.92 ipc (  2.42% stalls)  98.13% L1 data cache
+          3.76M cycles  14.75M instructions  33.73% retired LD/ST (  4.97M)
 
-escape-goat                    1.32 ms/iter   1.27 ms  █
-                        (1.11 ms … 2.51 ms)   2.26 ms  ██
-                    (  3.30 mb …   3.30 mb)   3.30 mb ▅██▇▃▂▁▁▁▁▁▁▁▂▂▁▂▂▂▂▂
-                  3.45 ipc (  2.78% stalls)  97.71% L1 data cache
-          4.41M cycles  15.22M instructions  31.34% retired LD/ST (  4.77M)
+escape-goat                    1.31 ms/iter   1.25 ms  █
+                        (1.10 ms … 2.44 ms)   2.28 ms  ██
+                    (  2.82 mb …   3.30 mb)   3.30 mb ▅██▇▃▁▁▁▁▁▁▁▁▁▂▂▂▂▂▁▁
+                  3.47 ipc (  2.78% stalls)  97.73% L1 data cache
+          4.40M cycles  15.27M instructions  31.26% retired LD/ST (  4.77M)
 
 • www.google.com (incognito)
 ------------------------------------------- -------------------------------
-fast-escape-html             408.12 µs/iter 409.88 µs  █
-                    (380.38 µs … 751.46 µs) 659.46 µs ▅█▆
-                    (513.24 kb … 513.29 kb) 513.27 kb ███▇▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.75 ipc (  0.87% stalls)  98.96% L1 data cache
-          1.37M cycles   6.52M instructions  19.21% retired LD/ST (  1.25M)
+fast-escape-html             400.52 µs/iter 403.25 µs  ▄█
+                    (371.13 µs … 683.21 µs) 591.13 µs  ██▇
+                    (513.24 kb … 513.29 kb) 513.27 kb █████▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.81 ipc (  0.80% stalls)  99.13% L1 data cache
+          1.36M cycles   6.53M instructions  19.21% retired LD/ST (  1.25M)
 
-escape-html                  413.83 µs/iter 416.63 µs  █
-                    (385.71 µs … 734.54 µs) 657.67 µs ▆█▇
-                    (513.24 kb … 513.29 kb) 513.27 kb ████▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.71 ipc (  0.86% stalls)  98.96% L1 data cache
-          1.39M cycles   6.53M instructions  19.09% retired LD/ST (  1.25M)
+escape-html                  403.63 µs/iter 406.29 µs  █▇
+                    (374.63 µs … 800.79 µs) 616.50 µs ███▅
+                    (513.24 kb … 513.29 kb) 513.27 kb ████▅▃▂▁▁▁▁▁▁▁▁▁▁▁▂▁▁
+                  4.78 ipc (  0.86% stalls)  98.99% L1 data cache
+          1.37M cycles   6.53M instructions  19.10% retired LD/ST (  1.25M)
 
-@napi-rs/escape              459.53 µs/iter 482.21 µs  ▄█▃
-                      (402.38 µs … 1.20 ms) 561.46 µs  ████▆▄▇▅▄▅ ▂
-                    (390.04 kb … 390.05 kb) 390.05 kb ▆█████████████▅▆▃▃▂▂▁
-                  4.57 ipc ( 16.56% stalls)  82.73% L1 data cache
-          1.51M cycles   6.91M instructions  22.03% retired LD/ST (  1.52M)
+@napi-rs/escape              437.08 µs/iter 458.08 µs   █▅▂
+                    (389.13 µs … 882.75 µs) 527.63 µs  ████▆▂ ▄██▄▂
+                    (390.05 kb … 390.05 kb) 390.05 kb ▅█████████████▅▃▃▃▂▂▁
+                  4.70 ipc ( 17.04% stalls)  82.80% L1 data cache
+          1.47M cycles   6.91M instructions  22.04% retired LD/ST (  1.52M)
 
-html-escaper                 526.24 µs/iter 519.75 µs  █
-                      (468.33 µs … 1.18 ms) 939.88 µs ▂█▅
-                    (702.72 kb … 761.38 kb) 758.76 kb ███▆▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.00 ipc (  3.05% stalls)  97.56% L1 data cache
-          1.76M cycles   7.05M instructions  33.22% retired LD/ST (  2.34M)
+html-escaper                 514.35 µs/iter 515.21 µs   █▅
+                      (454.92 µs … 1.06 ms) 784.38 µs  ▆██▄
+                    (702.80 kb … 761.38 kb) 758.79 kb ▂████▅▂▁▁▁▁▁▁▁▂▂▁▁▁▁▁
+                  4.09 ipc (  3.12% stalls)  97.59% L1 data cache
+          1.72M cycles   7.06M instructions  33.20% retired LD/ST (  2.34M)
 
-lodash.escape                532.46 µs/iter 526.42 µs  █
-                      (473.00 µs … 1.45 ms)   1.23 ms ▃█
-                    (745.70 kb … 825.25 kb) 760.77 kb ██▇▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-                  4.04 ipc (  2.98% stalls)  97.65% L1 data cache
-          1.78M cycles   7.18M instructions  33.42% retired LD/ST (  2.40M)
+lodash.escape                509.40 µs/iter 506.67 µs  █
+                      (463.13 µs … 1.17 ms) 936.88 µs  █▃
+                    (745.70 kb … 825.25 kb) 760.75 kb ▄██▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.19 ipc (  3.10% stalls)  97.69% L1 data cache
+          1.71M cycles   7.18M instructions  33.44% retired LD/ST (  2.40M)
 
-escape-goat                  680.58 µs/iter 663.46 µs  █
-                      (569.46 µs … 1.54 ms)   1.41 ms ▂█▆
-                    (  1.75 mb …   2.20 mb)   1.97 mb ███▇▂▁▁▁▁▁▁▁▁▁▂▂▁▂▁▁▁
-                  3.26 ipc (  4.67% stalls)  95.01% L1 data cache
-          2.29M cycles   7.47M instructions  29.19% retired LD/ST (  2.18M)
+escape-goat                  668.79 µs/iter 652.33 µs  █▄
+                      (560.54 µs … 1.91 ms)   1.34 ms  ██
+                    (  1.82 mb …   1.97 mb)   1.97 mb ▅██▇▂▁▁▁▁▂▂▁▁▁▁▁▁▁▁▁▁
+                  3.31 ipc (  4.73% stalls)  95.04% L1 data cache
+          2.25M cycles   7.44M instructions  29.08% retired LD/ST (  2.16M)
+
+• about.gitlab.com
+------------------------------------------- -------------------------------
+fast-escape-html             755.94 µs/iter 755.79 µs  ▄█
+                      (693.46 µs … 1.21 ms)   1.12 ms ▄██▆
+                    (917.91 kb … 917.98 kb) 917.93 kb ████▇▄▂▁▁▁▁▁▁▁▁▁▂▂▂▂▂
+                  4.79 ipc (  0.79% stalls)  99.19% L1 data cache
+          2.57M cycles  12.31M instructions  19.35% retired LD/ST (  2.38M)
+
+escape-html                  766.91 µs/iter 768.13 µs  ██▃
+                      (701.46 µs … 1.20 ms)   1.14 ms ▃███
+                    (917.91 kb … 917.97 kb) 917.93 kb ████▇▃▂▂▁▁▁▁▁▁▁▁▂▂▂▂▁
+                  4.74 ipc (  0.85% stalls)  99.05% L1 data cache
+          2.60M cycles  12.32M instructions  19.24% retired LD/ST (  2.37M)
+
+@napi-rs/escape              879.66 µs/iter 896.38 µs    ▆█
+                      (789.88 µs … 1.68 ms)   1.16 ms   ▂███▅
+                    (732.54 kb … 732.54 kb) 732.54 kb ▃▅██████▆▄▃▁▂▁▁▁▁▁▁▁▁
+                  4.99 ipc ( 22.73% stalls)  79.87% L1 data cache
+          2.95M cycles  14.73M instructions  23.03% retired LD/ST (  3.39M)
+
+html-escaper                 948.21 µs/iter 947.33 µs  ▅█▂
+                      (838.25 µs … 1.61 ms)   1.48 ms  ███
+                    (  1.36 mb …   1.42 mb)   1.37 mb ▄████▃▂▂▂▂▂▂▁▁▂▁▁▁▁▂▁
+                  4.08 ipc (  3.43% stalls)  97.48% L1 data cache
+          3.19M cycles  13.04M instructions  32.88% retired LD/ST (  4.29M)
+
+lodash.escape                951.94 µs/iter 947.83 µs  ▃█
+                      (845.63 µs … 1.76 ms)   1.54 ms  ██▅
+                    (  1.36 mb …   1.42 mb)   1.37 mb ▄███▅▃▁▁▁▁▁▂▂▂▂▂▁▁▁▁▁
+                  4.11 ipc (  3.39% stalls)  97.54% L1 data cache
+          3.21M cycles  13.20M instructions  33.12% retired LD/ST (  4.37M)
+
+escape-goat                    1.18 ms/iter   1.16 ms   █
+                      (994.13 µs … 1.92 ms)   1.75 ms  ▂██▃
+                    (  3.65 mb …   3.65 mb)   3.65 mb ▂████▅▃▁▁▁▁▂▂▃▃▂▂▃▂▂▂
+                  3.41 ipc (  4.86% stalls)  95.36% L1 data cache
+          3.97M cycles  13.52M instructions  29.33% retired LD/ST (  3.96M)
 ```

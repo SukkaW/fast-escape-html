@@ -26,7 +26,8 @@ import { escapeHTML as escapeHTMLRs } from '@napi-rs/escape';
     ['skk.moe', 'skk.moe.html'],
     ['github.com (incognito)', 'github.com.html'],
     ['stackoverflow.com (incognito)', 'stackoverflow.com.html'],
-    ['www.google.com (incognito)', 'google.com.html']
+    ['www.google.com (incognito)', 'google.com.html'],
+    ['about.gitlab.com', 'about.gitlab.com.html']
   ] as const;
 
   fixtures.forEach(([name, fixturePath]) => {
