@@ -42,6 +42,7 @@
   "license": "MIT",
   "devDependencies": {
     "@eslint-sukka/node": "^6.20.0",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@napi-rs/escape": "^1.0.1",
     "@swc-node/register": "^1.10.10",
     "@types/escape-html": "^1.0.4",
@@ -61,6 +62,7 @@
     "lodash.escape": "^4.0.1",
     "mitata": "^1.0.34",
     "mocha": "^11.5.0",
+    "nyc": "^17.1.0",
     "typescript": "^5.8.3"
   },
   "packageManager": "pnpm@10.11.0"

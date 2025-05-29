@@ -3,6 +3,10 @@ import { expect } from 'expect';
 import { escapeHTML } from '.';
 
 describe('escape-html', () => {
+  describe('not html', () => {
+    expect(escapeHTML('https://skk.moe')).toStrictEqual('https://skk.moe');
+  });
+
   describe('when string contains \'"\'', () => {
     expect(escapeHTML('"')).toStrictEqual('&quot;');
     expect(escapeHTML('"bar')).toStrictEqual('&quot;bar');
