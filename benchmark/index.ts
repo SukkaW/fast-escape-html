@@ -2,7 +2,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
 
-import { escapeHTML } from '../src';
 import npmEscapeHtml from 'escape-html';
 import { escape as htmlEscaper } from 'html-escaper';
 import { htmlEscape as escapeGoat } from 'escape-goat';
@@ -11,29 +10,30 @@ import { escapeHTML as escapeHTMLRs } from '@napi-rs/escape';
 
 (async () => {
   const { bench, group, run } = await import('mitata');
+  const { escapeHTML } = await import('../dist/cjs/index.js');
 
   const fns = [
     ['fast-escape-html', escapeHTML],
     ['escape-html', npmEscapeHtml],
+    ['@napi-rs/escape', escapeHTMLRs],
     ['html-escaper', htmlEscaper],
-    ['escape-goat', escapeGoat],
     ['lodash.escape', lodashEscape],
-    ['@napi-rs/escape', escapeHTMLRs]
+    ['escape-goat', escapeGoat]
   ] as const;
 
-  group('skk.moe', () => {
-    const fixture = fs.readFileSync(path.join(__dirname, './fixtures/skk.moe.html'), 'utf-8');
+  const fixtures = [
+    ['skk.moe', 'skk.moe.html'],
+    ['github.com (incognito)', 'github.com.html'],
+    ['stackoverflow.com (incognito)', 'stackoverflow.com.html'],
+    ['www.google.com (incognito)', 'google.com.html']
+  ] as const;
 
-    fns.forEach(([name, fn]) => {
-      bench(name, () => fn(fixture));
-    });
-  });
-
-  group('github.com (incognito)', () => {
-    const fixture = fs.readFileSync(path.join(__dirname, './fixtures/github.com.html'), 'utf-8');
-
-    fns.forEach(([name, fn]) => {
-      bench(name, () => fn(fixture));
+  fixtures.forEach(([name, fixturePath]) => {
+    group(name, () => {
+      const fixture = fs.readFileSync(path.join(__dirname, './fixtures/', fixturePath), 'utf-8');
+      fns.forEach(([name, fn]) => {
+        bench(name, () => fn(fixture));
+      });
     });
   });
 

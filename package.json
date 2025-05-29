@@ -26,7 +26,6 @@
   "scripts": {
     "lint": "eslint --format=sukka .",
     "test": "SWC_NODE_IGNORE_DYNAMIC=1 SWC_NODE_PROJECT=tsconfig.test-swc.json nyc mocha --require @swc-node/register --full-trace ./src/**/*.test.ts",
-    "prebench": "pnpm run build",
     "bench": "SWC_NODE_IGNORE_DYNAMIC=1 node --require @swc-node/register benchmark/index.ts",
     "build": "bunchee --no-sourcemap",
     "prerelease": "pnpm run lint && pnpm run test && pnpm run build",
