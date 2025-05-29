@@ -14,22 +14,34 @@ export function escapeHTML(str: string) {
   const len = str.length;
 
   // iterate from the first match
+
+  /**
+   * Adjust order for commonly seen symbols:
+   * Take https://tc39.es/ecma262 as an example,
+   *
+   * < 369266
+   * > 369296, though sometimes it is more common, it alomost always comes after <
+   * " 277105, people seems always prefer " over ' in HTML
+   * ' 484, less often, but sometimes is used for attribute anyway
+   * & 4424
+   */
+
   for (; index < len; index++) {
     switch (str.charCodeAt(index)) {
-      case 34: // "
-        escape = '&quot;';
-        break;
-      case 38: // &
-        escape = '&amp;';
-        break;
-      case 39: // '
-        escape = '&#39;';
-        break;
       case 60: // <
         escape = '&lt;';
         break;
       case 62: // >
         escape = '&gt;';
+        break;
+      case 34: // "
+        escape = '&quot;';
+        break;
+      case 39: // '
+        escape = '&#39;';
+        break;
+      case 38: // &
+        escape = '&amp;';
         break;
       default:
         continue;
