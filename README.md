@@ -16,8 +16,45 @@ pnpm add fast-escape-html
 ## Usage
 
 ```ts
-import { escapeHTML } from 'fast-escape-html';
+import { escapeHTML, unescapeHTML } from 'fast-escape-html';
 ```
+
+## **DO NOT USE `unescape-html` OR `escape-goat` TO UNESCAPE UN-TRUSTED HTML!**
+
+Only use safe libraries like `fast-escape-html` or `html-escaper` that only look up and replace the entire input once.
+
+Both `unescape-html` and `escape-goat` use the **multiple replace** implementation similar to this:
+
+```ts
+function unescapeHTML(str: string): string {
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+```
+
+BUT THAT IS **UNSAFE**! Considering this **untrusted input**:
+
+```html
+&amp;lt;script&amp;gt;alert("yo")&amp;lt;/script&amp;gt;
+```
+
+With `fast-escape-html` or `html-escaper` it will become:
+
+```html
+&lt;script&gt;alert("yo")&lt;/script&gt;
+```
+
+Which is safe. But with `unescape-html` or `escape-goat`, it will become:
+
+```html
+<script>alert("yo")</script>
+```
+
+Boom, XSS!
 
 ## Benchmark
 
@@ -40,7 +77,7 @@ pnpm run bench
 sudo pnpm run bench
 ```
 
-Results follow:
+### Escape
 
 ```
 clk: ~3.17 GHz
@@ -238,4 +275,168 @@ escape-goat                    1.18 ms/iter   1.16 ms   █
                     (  3.65 mb …   3.65 mb)   3.65 mb ▂████▅▃▁▁▁▁▂▂▃▃▂▂▃▂▂▂
                   3.41 ipc (  4.86% stalls)  95.36% L1 data cache
           3.97M cycles  13.52M instructions  29.33% retired LD/ST (  3.96M)
+```
+
+### Unescape
+
+```
+• skk.moe
+------------------------------------------- -------------------------------
+fast-escape-html             625.54 µs/iter 621.04 µs █▄
+                      (564.67 µs … 1.83 ms)   1.58 ms ██
+                    (625.88 kb … 691.60 kb) 647.84 kb ██▆▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.95 ipc (  2.02% stalls)  98.48% L1 data cache
+          2.10M cycles  10.41M instructions  31.19% retired LD/ST (  3.25M)
+
+html-escaper                 635.10 µs/iter 627.46 µs █▇
+                      (567.17 µs … 1.86 ms)   1.60 ms ██
+                    (625.88 kb … 691.60 kb) 647.93 kb ██▇▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.98 ipc (  2.00% stalls)  98.47% L1 data cache
+          2.12M cycles  10.55M instructions  30.81% retired LD/ST (  3.25M)
+
+lodash.unescape              629.00 µs/iter 623.50 µs █▂
+                      (570.08 µs … 1.73 ms)   1.62 ms ██
+                    (625.88 kb … 669.27 kb) 647.90 kb ██▅▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  5.01 ipc (  2.00% stalls)  98.49% L1 data cache
+          2.11M cycles  10.57M instructions  30.98% retired LD/ST (  3.27M)
+
+hexo-util                    633.44 µs/iter 626.71 µs █▆
+                      (574.08 µs … 1.73 ms)   1.52 ms ██
+                    (625.93 kb … 700.67 kb) 647.87 kb ██▆▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  5.01 ipc (  1.96% stalls)  98.51% L1 data cache
+          2.12M cycles  10.65M instructions  30.77% retired LD/ST (  3.28M)
+
+unescape                       1.09 ms/iter   1.08 ms  █
+                      (990.75 µs … 2.08 ms)   1.92 ms ██▆
+                    (  1.20 mb …   1.29 mb)   1.25 mb ███▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁
+                  5.36 ipc (  1.72% stalls)  99.04% L1 data cache
+          3.66M cycles  19.63M instructions  31.63% retired LD/ST (  6.21M)
+
+• github.com (incognito)
+------------------------------------------- -------------------------------
+fast-escape-html               1.76 ms/iter   1.76 ms  █▂
+                        (1.59 ms … 2.79 ms)   2.71 ms ▄██▃
+                    (  1.61 mb …   1.65 mb)   1.61 mb █████▂▁▁▁▁▁▁▁▁▁▁▂▃▂▂▂
+                  4.73 ipc (  1.79% stalls)  98.53% L1 data cache
+          5.89M cycles  27.90M instructions  30.56% retired LD/ST (  8.53M)
+
+html-escaper                   1.79 ms/iter   1.78 ms  █
+                        (1.62 ms … 2.95 ms)   2.85 ms ▄█▄
+                    (  1.61 mb …   1.65 mb)   1.61 mb ████▄▂▁▁▁▁▁▁▁▁▁▁▂▂▁▂▂
+                  4.76 ipc (  1.76% stalls)  98.52% L1 data cache
+          5.99M cycles  28.47M instructions  30.06% retired LD/ST (  8.56M)
+
+lodash.unescape                1.79 ms/iter   1.78 ms  █
+                        (1.61 ms … 3.21 ms)   2.82 ms ███▄
+                    (  1.61 mb …   1.64 mb)   1.61 mb ████▅▂▂▁▁▁▂▁▁▂▂▂▂▂▁▁▁
+                  4.79 ipc (  1.77% stalls)  98.53% L1 data cache
+          5.91M cycles  28.34M instructions  30.28% retired LD/ST (  8.58M)
+
+hexo-util                      1.78 ms/iter   1.77 ms  █
+                        (1.62 ms … 3.00 ms)   2.76 ms ▅██▃
+                    (  1.61 mb …   1.62 mb)   1.61 mb ████▄▃▁▁▁▁▁▁▁▁▁▁▁▂▂▂▁
+                  4.79 ipc (  1.75% stalls)  98.54% L1 data cache
+          5.95M cycles  28.52M instructions  30.10% retired LD/ST (  8.59M)
+
+unescape                       3.15 ms/iter   3.07 ms  █
+                        (2.82 ms … 4.70 ms)   4.58 ms ▃██
+                    (  3.15 mb …   3.21 mb)   3.16 mb ████▂▂▁▁▁▁▁▁▁▁▃▁▃▃▃▂▂
+                  5.25 ipc (  1.58% stalls)  99.12% L1 data cache
+         10.38M cycles  54.51M instructions  30.98% retired LD/ST ( 16.89M)
+
+• stackoverflow.com (incognito)
+------------------------------------------- -------------------------------
+fast-escape-html               1.71 ms/iter   1.71 ms ▃█
+                        (1.55 ms … 3.20 ms)   2.74 ms ██▆▃
+                    (  1.48 mb …   1.51 mb)   1.50 mb ████▅▁▁▁▁▁▁▁▁▁▁▂▂▂▁▂▂
+                  4.65 ipc (  1.74% stalls)  98.57% L1 data cache
+          5.68M cycles  26.44M instructions  30.91% retired LD/ST (  8.17M)
+
+html-escaper                   1.71 ms/iter   1.70 ms █▇
+                        (1.58 ms … 2.91 ms)   2.64 ms ██▇
+                    (  1.48 mb …   1.52 mb)   1.50 mb ████▄▂▁▁▁▁▁▁▁▁▁▂▁▂▂▂▂
+                  4.70 ipc (  1.74% stalls)  98.57% L1 data cache
+          5.73M cycles  26.94M instructions  30.46% retired LD/ST (  8.21M)
+
+lodash.unescape                1.70 ms/iter   1.69 ms █▂
+                        (1.57 ms … 3.00 ms)   2.70 ms ██▄
+                    (  1.48 mb …   1.51 mb)   1.50 mb ███▇▃▂▁▁▁▁▁▁▁▁▁▁▂▂▂▁▁
+                  4.72 ipc (  1.74% stalls)  98.57% L1 data cache
+          5.69M cycles  26.87M instructions  30.68% retired LD/ST (  8.25M)
+
+hexo-util                      1.76 ms/iter   1.74 ms █▅
+                        (1.59 ms … 4.05 ms)   2.98 ms ██▅
+                    (  1.48 mb …   1.51 mb)   1.50 mb ███▅▃▂▁▁▁▁▁▂▂▂▂▂▁▁▁▁▁
+                  4.67 ipc (  1.69% stalls)  98.58% L1 data cache
+          5.80M cycles  27.07M instructions  30.47% retired LD/ST (  8.25M)
+
+unescape                       2.86 ms/iter   2.89 ms ▆█ ▂
+                        (2.67 ms … 3.87 ms)   3.60 ms ██▆█▆▂
+                    (  2.97 mb …   2.98 mb)   2.97 mb ██████▄▃▂▂▁▁▃▃▃▁▄▂▂▁▁
+                  5.25 ipc (  1.60% stalls)  99.13% L1 data cache
+          9.56M cycles  50.22M instructions  31.35% retired LD/ST ( 15.75M)
+
+• www.google.com (incognito)
+------------------------------------------- -------------------------------
+fast-escape-html             775.50 µs/iter 767.25 µs █▃
+                      (699.54 µs … 2.03 ms)   1.81 ms ██
+                    (829.08 kb … 954.86 kb) 953.04 kb ██▇▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.80 ipc (  2.21% stalls)  98.16% L1 data cache
+          2.60M cycles  12.48M instructions  29.47% retired LD/ST (  3.68M)
+
+html-escaper                 794.20 µs/iter 795.04 µs ▄█
+                      (705.92 µs … 1.90 ms)   1.84 ms ██▃
+                    (829.08 kb … 954.80 kb) 952.84 kb ███▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.77 ipc (  2.15% stalls)  98.18% L1 data cache
+          2.66M cycles  12.67M instructions  29.13% retired LD/ST (  3.69M)
+
+lodash.unescape              786.99 µs/iter 783.17 µs █▆
+                      (704.96 µs … 1.98 ms)   1.84 ms ██▂
+                    (857.23 kb … 954.80 kb) 953.26 kb ███▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.80 ipc (  2.18% stalls)  98.17% L1 data cache
+          2.64M cycles  12.68M instructions  29.28% retired LD/ST (  3.71M)
+
+hexo-util                    797.88 µs/iter 789.46 µs █
+                      (715.83 µs … 2.07 ms)   1.89 ms ██
+                    (829.12 kb … 954.86 kb) 953.08 kb ██▇▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+                  4.78 ipc (  2.15% stalls)  98.16% L1 data cache
+          2.67M cycles  12.76M instructions  29.10% retired LD/ST (  3.71M)
+
+unescape                       1.43 ms/iter   1.43 ms █▄
+                        (1.29 ms … 2.48 ms)   2.41 ms ██▇
+                    (  1.46 mb …   1.54 mb)   1.51 mb ████▄▁▁▁▁▁▁▁▁▂▁▁▁▁▂▁▂
+                  5.29 ipc (  1.71% stalls)  98.97% L1 data cache
+          4.76M cycles  25.18M instructions  29.94% retired LD/ST (  7.54M)
+
+• about.gitlab.com
+------------------------------------------- -------------------------------
+fast-escape-html               1.41 ms/iter   1.41 ms ▃█
+                        (1.28 ms … 2.32 ms)   2.29 ms ██▆▂
+                    (  1.54 mb …   1.57 mb)   1.55 mb ████▅▂▁▁▁▁▁▁▁▁▁▂▂▂▂▁▂
+                  4.80 ipc (  2.38% stalls)  98.10% L1 data cache
+          4.72M cycles  22.67M instructions  29.38% retired LD/ST (  6.66M)
+
+html-escaper                   1.44 ms/iter   1.43 ms ▂█
+                        (1.29 ms … 2.88 ms)   2.44 ms ██▇
+                    (  1.54 mb …   1.57 mb)   1.55 mb ████▄▂▁▁▁▁▁▁▁▁▁▂▁▂▂▂▁
+                  4.81 ipc (  2.35% stalls)  98.08% L1 data cache
+          4.82M cycles  23.17M instructions  28.97% retired LD/ST (  6.71M)
+
+lodash.unescape                1.42 ms/iter   1.41 ms ▂█
+                        (1.29 ms … 2.44 ms)   2.33 ms ██▅
+                    (  1.54 mb …   1.57 mb)   1.55 mb ████▃▂▁▁▁▁▁▁▁▁▁▁▂▂▂▂▁
+                  4.83 ipc (  2.37% stalls)  98.10% L1 data cache
+          4.77M cycles  23.06M instructions  29.16% retired LD/ST (  6.72M)
+
+hexo-util                      1.43 ms/iter   1.42 ms  █
+                        (1.30 ms … 2.59 ms)   2.36 ms ██▃
+                    (  1.54 mb …   1.58 mb)   1.55 mb ███▇▂▂▁▁▁▁▁▁▁▁▁▁▂▁▂▁▁
+                  4.83 ipc (  2.34% stalls)  98.12% L1 data cache
+          4.80M cycles  23.20M instructions  28.99% retired LD/ST (  6.72M)
+
+unescape                       2.64 ms/iter   2.61 ms  █▃
+                        (2.38 ms … 4.12 ms)   3.86 ms ▆██▄
+                    (  2.73 mb …   2.77 mb)   2.74 mb ████▅▃▁▁▁▁▁▁▁▁▁▂▁▄▂▃▂
+                  5.26 ipc (  1.79% stalls)  98.91% L1 data cache
+          8.79M cycles  46.25M instructions  29.91% retired LD/ST ( 13.83M)
 ```
