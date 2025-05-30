@@ -2,12 +2,12 @@ import { describe, it } from 'mocha';
 import { expect } from 'expect';
 import { escapeHTML } from '.';
 
-describe('escape-html', () => {
-  describe('not html', () => {
+describe('escape', () => {
+  it('not html', () => {
     expect(escapeHTML('https://skk.moe')).toStrictEqual('https://skk.moe');
   });
 
-  describe('when string contains \'"\'', () => {
+  it('when string contains \'"\'', () => {
     expect(escapeHTML('"')).toStrictEqual('&quot;');
     expect(escapeHTML('"bar')).toStrictEqual('&quot;bar');
     expect(escapeHTML('foo"')).toStrictEqual('foo&quot;');
@@ -15,7 +15,7 @@ describe('escape-html', () => {
     expect(escapeHTML('foo""bar')).toStrictEqual('foo&quot;&quot;bar');
   });
 
-  describe('when string contains "&"', () => {
+  it('when string contains "&"', () => {
     expect(escapeHTML('&')).toStrictEqual('&amp;');
     expect(escapeHTML('&bar')).toStrictEqual('&amp;bar');
     expect(escapeHTML('foo&')).toStrictEqual('foo&amp;');
@@ -23,7 +23,7 @@ describe('escape-html', () => {
     expect(escapeHTML('foo&&bar')).toStrictEqual('foo&amp;&amp;bar');
   });
 
-  describe('when string contains "\'"', () => {
+  it('when string contains "\'"', () => {
     expect(escapeHTML('\'')).toStrictEqual('&#39;');
     expect(escapeHTML('\'bar')).toStrictEqual('&#39;bar');
     expect(escapeHTML('foo\'')).toStrictEqual('foo&#39;');
