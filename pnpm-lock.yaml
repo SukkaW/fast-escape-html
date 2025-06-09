@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  eslint>chalk: npm:picocolors@^1.1.1
+
 importers:
 
   .:
@@ -3750,7 +3753,7 @@ snapshots:
       '@types/estree': 1.0.7
       '@types/json-schema': 7.0.15
       ajv: 6.12.6
-      chalk: 4.1.2
+      chalk: picocolors@1.1.1
       cross-spawn: 7.0.6
       debug: 4.4.1(supports-color@8.1.1)
       escape-string-regexp: 4.0.0
