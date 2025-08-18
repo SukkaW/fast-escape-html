@@ -25,7 +25,7 @@
   },
   "scripts": {
     "lint": "eslint --format=sukka .",
-    "test": "SWC_NODE_IGNORE_DYNAMIC=1 SWC_NODE_PROJECT=tsconfig.test-swc.json nyc mocha --require @swc-node/register --full-trace ./src/**/*.test.ts",
+    "test": "SWC_NODE_IGNORE_DYNAMIC=1 SWC_NODE_INLINE_SOURCE_MAP=1 nyc mocha --require @swc-node/register --full-trace ./src/**/*.test.ts",
     "bench": "SWC_NODE_IGNORE_DYNAMIC=1 node --require @swc-node/register benchmark/index.ts",
     "build": "bunchee --no-sourcemap",
     "prerelease": "pnpm run lint && pnpm run test && pnpm run build",
@@ -40,39 +40,44 @@
   "author": "SukkaW <https://skk.moe>",
   "license": "MIT",
   "devDependencies": {
-    "@eslint-sukka/node": "^6.21.0",
+    "@eslint-sukka/node": "^6.23.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@mitata/counters": "^0.0.8",
     "@napi-rs/escape": "^1.0.1",
-    "@swc-node/register": "^1.10.10",
+    "@swc-node/register": "^1.11.1",
     "@types/escape-html": "^1.0.4",
     "@types/html-escaper": "^3.0.4",
     "@types/lodash.escape": "^4.0.9",
     "@types/lodash.unescape": "^4.0.9",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^22.15.30",
-    "bumpp": "^10.1.1",
-    "bunchee": "^6.5.2",
+    "@types/node": "^22.17.2",
+    "bumpp": "^10.2.3",
+    "bunchee": "^6.6.0",
     "escape-goat": "^4.0.0",
     "escape-html": "^1.0.3",
-    "eslint": "^9.28.0",
-    "eslint-config-sukka": "^6.21.0",
-    "eslint-formatter-sukka": "^6.21.0",
+    "eslint": "^9.33.0",
+    "eslint-config-sukka": "^6.23.1",
+    "eslint-formatter-sukka": "^6.23.1",
     "expect": "30.0.0-beta.3",
     "hexo-util": "^3.3.0",
     "html-escaper": "^3.0.3",
     "lodash.escape": "^4.0.1",
     "lodash.unescape": "^4.0.1",
     "mitata": "^1.0.34",
-    "mocha": "^11.5.0",
+    "mocha": "^11.7.1",
     "nyc": "^17.1.0",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "unescape": "^1.0.1"
   },
-  "packageManager": "pnpm@10.11.1",
+  "packageManager": "pnpm@10.14.0",
   "pnpm": {
     "overrides": {
       "eslint>chalk": "npm:picocolors@^1.1.1"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "oxc-resolver",
+      "unrs-resolver"
+    ]
   }
 }
