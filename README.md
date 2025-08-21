@@ -440,3 +440,19 @@ unescape                       2.64 ms/iter   2.61 ms  █▃
                   5.26 ipc (  1.79% stalls)  98.91% L1 data cache
           8.79M cycles  46.25M instructions  29.91% retired LD/ST ( 13.83M)
 ```
+
+## License
+
+[MIT](./LICENSE).
+
+----
+
+**fast-escape-html** © [Sukka](https://github.com/SukkaW), Authored and maintained by Sukka with help from contributors ([list](https://github.com/SukkaW/fast-escape-html/graphs/contributors)).
+
+> [Personal Website](https://skk.moe) · [Blog](https://blog.skk.moe) · GitHub [@SukkaW](https://github.com/SukkaW) · Telegram Channel [@SukkaChannel](https://t.me/SukkaChannel) · Twitter [@isukkaw](https://twitter.com/isukkaw) · Keybase [@sukka](https://keybase.io/sukka)
+
+<p align="center">
+  <a href="https://github.com/sponsors/SukkaW/">
+    <img src="https://sponsor.cdn.skk.moe/sponsors.svg"/>
+  </a>
+</p>
