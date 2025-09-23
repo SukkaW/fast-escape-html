@@ -55,7 +55,7 @@
     "bunchee": "^6.6.0",
     "escape-goat": "^4.0.0",
     "escape-html": "^1.0.3",
-    "eslint": "^9.35.0",
+    "eslint": "^9.36.0",
     "eslint-config-sukka": "^7.1.1",
     "eslint-formatter-sukka": "^7.1.1",
     "expect": "30.0.0-beta.3",
@@ -69,7 +69,7 @@
     "typescript": "^5.9.2",
     "unescape": "^1.0.1"
   },
-  "packageManager": "pnpm@10.17.0",
+  "packageManager": "pnpm@10.17.1",
   "pnpm": {
     "overrides": {
       "eslint>chalk": "npm:picocolors@^1.1.1"
