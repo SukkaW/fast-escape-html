@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  eslint>chalk: npm:picocolors@^1.1.1
-
 importers:
 
   .:

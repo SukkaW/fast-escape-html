@@ -69,7 +69,7 @@
     "typescript": "^5.9.3",
     "unescape": "^1.0.1"
   },
-  "packageManager": "pnpm@10.34.1",
+  "packageManager": "pnpm@11.5.2",
   "pnpm": {
     "overrides": {
       "eslint>chalk": "npm:picocolors@^1.1.1"
