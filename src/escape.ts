@@ -6,6 +6,7 @@ export function escapeHTML(str: string) {
     return str;
   }
 
+  // eslint-disable-next-line no-useless-assignment -- type hint for v8
   let escape = '';
   let html = '';
 
