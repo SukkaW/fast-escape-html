@@ -56,7 +56,7 @@
     "earl": "^2.0.0",
     "escape-goat": "^4.0.0",
     "escape-html": "^1.0.3",
-    "eslint": "^10.8.1",
+    "eslint": "^10.9.1",
     "eslint-config-sukka": "^9.0.1",
     "eslint-formatter-sukka": "^9.0.1",
     "hexo-util": "^3.3.0",
@@ -64,10 +64,10 @@
     "lodash.escape": "^4.0.1",
     "lodash.unescape": "^4.0.1",
     "mitata": "^1.0.34",
-    "mocha": "^11.8.0",
+    "mocha": "^12.0.0",
     "nyc": "^18.0.0",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "unescape": "^1.0.1"
   },
-  "packageManager": "pnpm@11.22.0"
+  "packageManager": "pnpm@11.25.0"
 }
